@@ -127,6 +127,7 @@ function initPrintEvent() {
   ipcMain.on('do', (event, deviceName,flag) => {
     const printers = printWindow.webContents.getPrinters();
       console.log('flag:'+flag)
+    console.log(deviceName)
       printers.forEach(element => {
         //实际情况是status为0，打印机是正常的，这里为了走进来，所以写了3
         if (element.name === deviceName && element.status != 3) {
@@ -143,6 +144,16 @@ function initPrintEvent() {
           console.log(element.status+'-'+deviceName)
           printWindow.webContents.print({
               silent: flag||false,
+              printBackground: false,
+              deviceName: element.name
+            },
+            (data) => {
+              console.log("回调", data);
+
+            });
+        }else {
+          printWindow.webContents.print({
+              silent:false,
               printBackground: false,
               deviceName: element.name
             },

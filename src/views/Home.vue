@@ -68,8 +68,8 @@ export default {
       obj.html = `<div>这是一段测试打印的程序</div>` //需打印的数据
       // electron.ipcRenderer.send('do',localStorage.getItem('printName'),localStorage.getItem('printName'),localStorage.getItem('printName')&&localStorage.getItem('isChosedPrint')==='1')
       const flag=localStorage.getItem('printName')&&localStorage.getItem('isSilent')=='true'
-      console.log(flag);
-      electron.ipcRenderer.send('print-start', obj,flag)
+      console.log(!!flag);
+      electron.ipcRenderer.send('print-start', obj,!!flag)
     },
     //关闭弹窗
     handleClose() {
